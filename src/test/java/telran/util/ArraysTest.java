@@ -19,4 +19,18 @@ void addTest() {
     int [] expected = {10, 7, 12, -4, 13, 3, 14, newNumber};
     assertArrayEquals(expected, add(numbers, newNumber));
 }
+
+@Test
+void insertTest() {
+    int[] expected1 = { 10, 7, 12, 4, -4, 13, 3, 14 };
+    assertArrayEquals(expected1, insert(numbers, 3, 4));
+    assertThrowsExactly(ArrayIndexOutOfBoundsException.class, () -> insert(numbers, 10,1004));
+}
+@Test
+void removeTest() {
+    int[] expected1 = { 10, 7, 12, -4, 3, 14 };
+    assertArrayEquals(expected1, remove(numbers, 4));
+    assertThrowsExactly(ArrayIndexOutOfBoundsException.class, () -> remove(numbers, -3));
+    assertThrowsExactly(ArrayIndexOutOfBoundsException.class, () -> remove(numbers, 10));
+}
 }
