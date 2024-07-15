@@ -1,1 +1,1 @@
-![Screenshot of a test report](test.JPG)
+![Screenshot of a test report](tests.JPG)

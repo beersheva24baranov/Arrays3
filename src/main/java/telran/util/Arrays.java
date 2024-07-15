@@ -75,26 +75,73 @@ public static void sort(int [] ar) {
  * @return see comments definition
  */
 public static int binarySearch(int [] ar, int key) {
-    //TODO
-    //index of the search key, if it is contained in the array;
-    // otherwise, (-(insertion point) - 1).
-    // The insertion point is defined as the point at which the key would be inserted into 
-    //the array: the index of the first element greater than the key, or a.length if all elements in the array are less than the specified key. Note that this guarantees that the return value will be >= 0 if and only if the key is found.
-    return -1;
-}
+    int left = 0;
+    int right = ar.length - 1;
 
+    while ( left <= right) {
+        int middle = (left + right) / 2;
+
+        if (ar[middle] == key) {
+            return middle;
+        }
+
+        if (ar[middle] < key) {
+            left = middle + 1;
+        } else {
+            right = middle - 1;
+        }
+    }
+    return -(left + 1);
+}
 public static int[] insertSorted(int[] arSorted, int number) {
-    //TODO
-    //arSorted is sorted array
-    //to insert number at index to keep the array sorted
-    //additional sorting is disallowed
-    return null;
-}
-public static boolean isOneSwap(int [] array) {
-    //TODO
-    //return true if a given array has exactly one swap to get sorted array
-    //the swaped array's elements may or may not be neighbors 
-    return false;
 
+    int  insPosition = binarySearch(arSorted, number);
+
+    if ( insPosition < 0) {
+        insPosition = -(insPosition + 1);
+    }
+
+    int [] newAr = new int[arSorted.length + 1];
+
+    System.arraycopy(arSorted, 0, newAr, 0, insPosition);
+
+    newAr[insPosition] = number;
+
+    System.arraycopy(arSorted, insPosition, newAr, insPosition + 1, arSorted.length - insPosition);
+
+    return newAr;
 }
+public static boolean isOneSwap(int[] array) {
+    int n = array.length;
+    int first = -1, second = -1;
+
+    for (int i = 0; i < n - 1; i++) {
+        if (array[i] > array[i + 1]) {
+            first = i;
+            break;
+        }
+    }
+    
+    if (first == -1) {
+        return false;
+    }
+
+    for (int i = n - 1; i > first; i--) {
+        if (array[i] < array[first]) {
+            second = i;
+            break;
+        }
+    }
+
+    swap(array, first, second);
+
+    for (int i = 0; i < n - 1; i++) {
+        if (array[i] > array[i + 1]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 }

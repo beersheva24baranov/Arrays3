@@ -73,4 +73,44 @@ private int[] getRandomArray(int nElements) {
     }
     return res;
 }
+@Test 
+void binarySearchTest(){
+    int [] sortedArrays= {-4, 3, 7, 10, 12, 13, 14 };
+    assertEquals(0, binarySearch(sortedArrays, -4));
+    assertEquals(1, binarySearch(sortedArrays, 3));
+    assertEquals(4, binarySearch(sortedArrays, 12));
+
+    assertEquals(-1, binarySearch(sortedArrays, -5));
+
+    assertEquals(-4, binarySearch(sortedArrays, 8));
+
+    assertEquals(-8, binarySearch(sortedArrays, 15));
+}
+@Test 
+void insertSortedTest(){
+    int[] sortedArray = { -4, 3, 7, 10, 13, 14, 16 };
+        int[] resArray1 = { -8, -4, 3, 7, 10, 13, 14, 16 };
+        int[] resArray2 = { -4, 3, 7, 10, 12, 13, 14, 16 };
+        int[] resArray3 = { -4, 3, 7, 10, 13, 14, 16, 19 };
+        assertArrayEquals(resArray1, insertSorted(sortedArray, -8));
+        assertArrayEquals(resArray2, insertSorted(sortedArray, 12));
+        assertArrayEquals(resArray3, insertSorted(sortedArray, 19));
+    
+}
+@Test
+    void isOneSwapTest() {
+        int[] testArrayTrue1 = { 16, -4, 3, 7, 10, 13, 14, -8 };
+        int[] testArrayTrue2 = { 12, 3, 7, 11, -4, 13, 14, 16 };
+        int[] testArrayTrue3 = { -4, 3, 7, 10, 19, 14, 16, 13 };
+        int[] testArrayFalse1 = { 16, 1, 3, 10, 7, 13, 14, 5 };
+        int[] testArrayFalse2 = { 10, 7, 15, -4, 13, 3, 14 };
+        int[] testArrayFalse3 = { -4, 3, 7, 10, 13, 14, 16 };
+        assertEquals(true, isOneSwap(testArrayTrue1));
+        assertEquals(true, isOneSwap(testArrayTrue2));
+        assertEquals(true, isOneSwap(testArrayTrue3));
+        assertEquals(false, isOneSwap(testArrayFalse1));
+        assertEquals(false, isOneSwap(testArrayFalse2));
+        assertEquals(false, isOneSwap(testArrayFalse3));
+    }
+
 }
