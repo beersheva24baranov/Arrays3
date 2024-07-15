@@ -89,12 +89,12 @@ void binarySearchTest(){
 @Test 
 void insertSortedTest(){
     int[] sortedArray = { -4, 3, 7, 10, 13, 14, 16 };
-        int[] resArray1 = { -8, -4, 3, 7, 10, 13, 14, 16 };
-        int[] resArray2 = { -4, 3, 7, 10, 12, 13, 14, 16 };
-        int[] resArray3 = { -4, 3, 7, 10, 13, 14, 16, 19 };
-        assertArrayEquals(resArray1, insertSorted(sortedArray, -8));
-        assertArrayEquals(resArray2, insertSorted(sortedArray, 12));
-        assertArrayEquals(resArray3, insertSorted(sortedArray, 19));
+        int[] testArray1 = { -8, -4, 3, 7, 10, 13, 14, 16 };
+        int[] testArray2 = { -4, 3, 7, 10, 12, 13, 14, 16 };
+        int[] testArray3 = { -4, 3, 7, 10, 13, 14, 16, 19 };
+        assertArrayEquals(testArray1, insertSorted(sortedArray, -8));
+        assertArrayEquals(testArray2, insertSorted(sortedArray, 12));
+        assertArrayEquals(testArray3, insertSorted(sortedArray, 19));
     
 }
 @Test
