@@ -1,6 +1,6 @@
-
 package telran.util;
 
+import java.util.Comparator;
 public class Arrays {
 public static int search(int[] ar, int key){
     int index = 0;
@@ -144,4 +144,39 @@ public static boolean isOneSwap(int[] array) {
     return true;
 }
 
+public static <T> void sort(T[] array, Comparator<T> comparator) {
+    int length = array.length;
+    boolean flSort = false;
+    do {
+        length--;
+        flSort = true;
+        for (int i = 0; i < length; i++) {
+            if (comparator.compare(array[i], array[i + 1]) > 0) {
+                swap(array, i, i + 1);
+                flSort = false;
+            }
+        }
+    } while (!flSort);
+}
+
+private static <T> void swap(T[] array, int i, int j) {
+    T tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+}
+
+public static <T> int binarySearch(T[] array, T key, Comparator<T> comp) {
+    int left = 0;
+    int right = array.length - 1;
+    int middle = (left + right) / 2;
+    while (left <= right && comp.compare(key, array[middle]) != 0) {
+        if (comp.compare(key, array[middle]) < 0) {
+            right = middle - 1;
+        } else {
+            left = middle + 1;
+        }
+        middle = (left + right) / 2;
+    }
+    return left > right ? -(left + 1) : middle;
+}
 }

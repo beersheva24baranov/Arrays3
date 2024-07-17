@@ -112,5 +112,26 @@ void insertSortedTest(){
         assertEquals(false, isOneSwap(testArrayFalse2));
         assertEquals(false, isOneSwap(testArrayFalse3));
     }
+    @Test
+void sortAnyTypeTest() {
+    String[] strings = {"lmn", "cfta", "w", "aa"};
+    String[] expectedASCII = {"aa", "cfta", "lmn", "w"};
+    String[] expectedLength = {"w", "aa", "lmn", "cfta"};
+    sort(strings, new ComparatorASCII());
+    assertArrayEquals(expectedASCII, strings);
+    sort(strings, new ComparatorLength());
+    assertArrayEquals(expectedLength, strings);
+}
 
+@Test
+void binarySearchAnyTypesTest(){
+    String[] strings = {"aa", "cfta", "lmn", "k"};
+    Integer[] numbers = {10, 20, 30, 40, 50};
+    assertEquals(0, binarySearch(strings, "aa", new ComparatorASCII()));
+    assertEquals(-2, binarySearch(strings, "ad", new ComparatorASCII()));
+    assertEquals(-3, binarySearch(strings, "k", new ComparatorASCII()));
+    assertEquals(4, binarySearch(numbers, 50, new ComparatorIntegers()));
+    assertEquals(0, binarySearch(numbers, 10, new ComparatorIntegers()));
+    assertEquals(-2, binarySearch(numbers, 12, new ComparatorIntegers()));
+}
 }
