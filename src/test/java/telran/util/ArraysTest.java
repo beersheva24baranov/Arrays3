@@ -126,12 +126,12 @@ void sortAnyTypeTest() {
 @Test
 void binarySearchAnyTypesTest(){
     String[] strings = {"aa", "cfta", "lmn", "k"};
-    Integer[] numbers = {10, 20, 30, 40, 50};
+    Integer[] numbers = {5, 10, 32, 47, 50};
     assertEquals(0, binarySearch(strings, "aa", new ComparatorASCII()));
     assertEquals(-2, binarySearch(strings, "ad", new ComparatorASCII()));
     assertEquals(-3, binarySearch(strings, "k", new ComparatorASCII()));
     assertEquals(4, binarySearch(numbers, 50, new ComparatorIntegers()));
-    assertEquals(0, binarySearch(numbers, 10, new ComparatorIntegers()));
-    assertEquals(-2, binarySearch(numbers, 12, new ComparatorIntegers()));
+    assertEquals(0, binarySearch(numbers, 5, new ComparatorIntegers()));
+    assertEquals(-6, binarySearch(numbers, 78, new ComparatorIntegers()));
 }
 }
