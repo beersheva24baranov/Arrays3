@@ -201,4 +201,10 @@ public static <T> T[] find(T[]array, Predicate<T> predicate) {
 public static <T> T[] removeIf (T[] array, Predicate<T> predicate){
     return find(array, predicate.negate());
 }
+public static String matchesRules(char[] chars,
+CharacterRule[] mustBeRules, CharacterRule[] mustNotBeRule) {
+   //TODO
+   //consider the class Character for rules definition
+   return "";
+}
 }

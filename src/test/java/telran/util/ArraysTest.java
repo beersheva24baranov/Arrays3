@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static telran.util.Arrays.*;
 
+import java.util.Comparator;
 import java.util.Random;
 public class ArraysTest {
 private static final int N_ELEMENTS = 1_000;
@@ -117,9 +118,9 @@ void sortAnyTypeTest() {
     String[] strings = {"lmn", "cfta", "w", "aa"};
     String[] expectedASCII = {"aa", "cfta", "lmn", "w"};
     String[] expectedLength = {"w", "aa", "lmn", "cfta"};
-    sort(strings, new ComparatorASCII());
+    sort(strings, (a, b) -> a.compareTo(b));
     assertArrayEquals(expectedASCII, strings);
-    sort(strings, new ComparatorLength());
+    sort(strings, (a, b) -> Integer.compare(a.length(), b.length()));
     assertArrayEquals(expectedLength, strings);
 }
 
@@ -127,12 +128,14 @@ void sortAnyTypeTest() {
 void binarySearchAnyTypesTest(){
     String[] strings = {"aa", "cfta", "lmn", "k"};
     Integer[] numbers = {5, 10, 32, 47, 50};
-    assertEquals(0, binarySearch(strings, "aa", new ComparatorASCII()));
-    assertEquals(-2, binarySearch(strings, "ad", new ComparatorASCII()));
-    assertEquals(-3, binarySearch(strings, "k", new ComparatorASCII()));
-    assertEquals(4, binarySearch(numbers, 50, new ComparatorIntegers()));
-    assertEquals(0, binarySearch(numbers, 5, new ComparatorIntegers()));
-    assertEquals(-6, binarySearch(numbers, 78, new ComparatorIntegers()));
+     Comparator<String> compStrings = (a, b) -> a.compareTo(b);
+    Comparator<Integer> compInteger = Integer::compare;
+    assertEquals(0, binarySearch(strings, "aa", compStrings));
+    assertEquals(-2, binarySearch(strings, "ad", compStrings));
+    assertEquals(-3, binarySearch(strings, "k", compStrings));
+    assertEquals(4, binarySearch(numbers, 50, compInteger));
+    assertEquals(0, binarySearch(numbers, 5, compInteger));
+    assertEquals(-6, binarySearch(numbers, 78, compInteger));
 }
 @Test
 void binarySearchNoComparator() {
@@ -151,20 +154,38 @@ void binarySearchNoComparator() {
 void evenOddSorting() {
     Integer[] array = {7, -8, 10, -100, 13, -10, 99};
     Integer[] expected = {-100, -10, -8, 10, 99, 13, 7}; //even numbers in ascending order first, odd numbers in descending order after that
-    sort(array, new EvenOddComparator());
+    sort(array, (a, b) -> {
+        boolean isArg0Even = a % 2 == 0;
+        boolean isArg1Even = b % 2 == 0;
+        boolean noSwapFlag = (isArg0Even && !isArg1Even) ||
+        (isArg0Even && isArg1Even && a <= b) ||
+         (!isArg0Even && !isArg1Even && a >= b);
+        return noSwapFlag ? -1 : 1;
+    });
     assertArrayEquals(expected, array);
 }
 @Test
 void findTest() {
     Integer[] array = {7, -8, 10, -100, 13, -10, 99};
     Integer [] expected = {7, 13, 99};
-    assertArrayEquals(expected, find(array, new OddNumbersPredicate()));
+    assertArrayEquals(expected, find(array, n -> n % 2 != 0));
 }
 @Test
     void removeIfTest() {
         Integer[] array = { 7, -8, 10, -100, 13, -10, 99 };
         Integer[] expected = { -8, 10, -100, -10 };
-        assertArrayEquals(expected, removeIf(array, new OddNumbersPredicate()));
+        assertArrayEquals(expected, removeIf(array, n -> n % 2 != 0));
     }
+    @Test
+void matchesRulesTest() {
+    //TODO
+    //Must be rules: at least one capital letter, at least one lower case letter, at least one digit, at least one dot(.)
+    //Must not be rules: space is disallowed
+    //examples: mathes - {'a', 'n', '*', 'G', '.', '.', '1'}
+    //mismatches - {'a', 'n', '*', 'G', '.', '.', '1', ' '} -> "space disallowed",
+    // {'a', 'n', '*',  '.', '.', '1'} -> "no capital",
+    // {'a', 'n', '*', 'G', '.', '.'} -> "no digit"
+
+}
 }
 
