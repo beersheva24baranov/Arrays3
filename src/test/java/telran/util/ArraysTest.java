@@ -191,8 +191,8 @@ void findTest() {
 
         char[] charArr1 = new char[] {'a', 'n', '*', 'W', '.', '.', '1'};
         char[] charArr2 = new char[]  {'a', 'n', 'u', 'e','p','o'};
-        char[] charArr3 = new char[]  {'.', 'n', '*', 'W', '.', '1', ' '};
-        char[] charArr4 = new char[]  {'S', 'N', ' '};
+        char[] charArr3 = new char[]  { 'a', 'n', '*', 'G', '.', '.', '1', ' ' };
+        char[] charArr4 = new char[]  {'Е', 'N', 'Ы',' '};
 
         assertEquals("", matchesRules(charArr1, mustBeRules, mustNotBeRule));
         assertEquals("no digit, no capital, no dot", matchesRules(charArr2, mustBeRules, mustNotBeRule));
