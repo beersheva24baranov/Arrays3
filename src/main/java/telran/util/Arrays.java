@@ -1,6 +1,8 @@
 package telran.util;
 import java.util.function.Predicate;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 public class Arrays {
 public static int search(int[] ar, int key){
     int index = 0;
@@ -201,10 +203,36 @@ public static <T> T[] find(T[]array, Predicate<T> predicate) {
 public static <T> T[] removeIf (T[] array, Predicate<T> predicate){
     return find(array, predicate.negate());
 }
-public static String matchesRules(char[] chars,
-CharacterRule[] mustBeRules, CharacterRule[] mustNotBeRule) {
-   //TODO
-   //consider the class Character for rules definition
-   return "";
+public static String matchesRules(char[] chars, CharacterRule[] mustBeRules, CharacterRule[] mustNotBeRule) {
+    List<String> errorMessages = new ArrayList<String>();
+    errorMessages.addAll(checkRules(chars, mustBeRules));
+    errorMessages.addAll(checkRules(chars, mustNotBeRule));
+    return String.join(", ", errorMessages);
+ }
+
+ private static List<String> checkRules(char[] chars, CharacterRule[] rules) {
+    List<String> result = new ArrayList<String>();
+    for (int i = 0; i < rules.length; i++) {
+        String errorMessage = checkRule(chars, rules[i]);
+        if (errorMessage != null) result.add(errorMessage);
+    }
+    return result;
 }
+ private static String checkRule(char[] chars, CharacterRule rule) {
+        String errorMessage = null;
+        boolean isAbsent = true;
+        int j = 0;
+        while (isAbsent && j < chars.length) {
+            if (rule.predicate.test(chars[j])) {
+                isAbsent = false;
+            }
+            j++;
+        }
+
+        if ((rule.flag && isAbsent) || (!rule.flag && !isAbsent)) {
+            errorMessage = rule.errorMessage;
+        }
+
+        return errorMessage;
+    }
 }

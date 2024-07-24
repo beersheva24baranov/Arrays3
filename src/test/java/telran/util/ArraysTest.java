@@ -176,16 +176,28 @@ void findTest() {
         Integer[] expected = { -8, 10, -100, -10 };
         assertArrayEquals(expected, removeIf(array, n -> n % 2 != 0));
     }
-    @Test
-void matchesRulesTest() {
-    //TODO
-    //Must be rules: at least one capital letter, at least one lower case letter, at least one digit, at least one dot(.)
-    //Must not be rules: space is disallowed
-    //examples: mathes - {'a', 'n', '*', 'G', '.', '.', '1'}
-    //mismatches - {'a', 'n', '*', 'G', '.', '.', '1', ' '} -> "space disallowed",
-    // {'a', 'n', '*',  '.', '.', '1'} -> "no capital",
-    // {'a', 'n', '*', 'G', '.', '.'} -> "no digit"
+    @Test 
+    void matchesRulesTest() {
+        CharacterRule [] mustBeRules = new CharacterRule[] {
+            new CharacterRule(true, Character::isDigit, "no digit"),
+            new CharacterRule(true, Character::isUpperCase, "no capital"),
+            new CharacterRule(true, Character::isLowerCase, "no lower"),
+            new CharacterRule(true, c -> c == '.', "no dot"),
+        };
 
-}
+        CharacterRule [] mustNotBeRule= new CharacterRule[] {
+            new CharacterRule(false, Character::isSpaceChar, "space disallowed"),
+        };
+
+        char[] charArr1 = new char[] {'a', 'n', '*', 'W', '.', '.', '1'};
+        char[] charArr2 = new char[]  {'a', 'n', 'u', 'e','p','o'};
+        char[] charArr3 = new char[]  {'.', 'n', '*', 'W', '.', '1', ' '};
+        char[] charArr4 = new char[]  {'S', 'N', ' '};
+
+        assertEquals("", matchesRules(charArr1, mustBeRules, mustNotBeRule));
+        assertEquals("no digit, no capital, no dot", matchesRules(charArr2, mustBeRules, mustNotBeRule));
+        assertEquals("space disallowed", matchesRules(charArr3, mustBeRules, mustNotBeRule));
+        assertEquals("no digit, no lower, no dot, space disallowed", matchesRules(charArr4, mustBeRules, mustNotBeRule));
+    }
 }
 
