@@ -68,8 +68,8 @@ private static void swap(int[] ar, int i, int j) { // замена местам�
 }
 public static void sort(int [] ar) {
     int length = ar.length ;
-    boolean flSorted = false;
-    while(!flSorted) {
+    boolean flSorted = false; // задаем что пока фолс
+    while(!flSorted) { // пока не отсортировано пушим максимальное в конец продвигаясь  в начало
         length--;
         flSorted = pushMaxAtEnd(ar, length);
     }
@@ -83,19 +83,19 @@ public static void sort(int [] ar) {
  */
 public static int binarySearch(int [] ar, int key) {
     int left = 0;
-    int right = ar.length - 1;
+    int right = ar.length - 1; // определяем последний индекс
 
-    while ( left <= right) {
-        int middle = (left + right) / 2;
+    while ( left <= right) { // пока лево меньше и равно право
+        int middle = (left + right) / 2; // середина = половина 
 
-        if (ar[middle] == key) {
+        if (ar[middle] == key) { // если искомое равен середине то возвращаем середину
             return middle;
         }
 
-        if (ar[middle] < key) {
+        if (ar[middle] < key) { // если искомое  больше  середины  то смещаем середину правее (ищем в правой половине)
             left = middle + 1;
         } else {
-            right = middle - 1;
+            right = middle - 1; // иначе смещаемся влево (ищем в левой половине)
         }
     }
     return -(left + 1);
