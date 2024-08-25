@@ -5,15 +5,15 @@ import java.util.Comparator;
 import java.util.List;
 public class Arrays {
 public static int search(int[] ar, int key){
-    int index = 0;
-    while(index < ar.length && key != ar[index]) {
+    int index = 0; // начинаем с 0
+    while(index < ar.length && key != ar[index]) { // пока индекс будет меньше длины массива и значение  из массива не будет равно  ключу перебираем индекс
         index++;
     }
-    return index == ar.length ? -1 : index;
+    return index == ar.length ? -1 : index; // если длина массива совпадает с индексом то выводим -1 если не совпадает то индекс (искомого значения)
 }
 public static int[] add(int [] ar, int number) {
-    int [] res = java.util.Arrays.copyOf(ar, ar.length + 1);
-    res[ar.length] = number;
+    int [] res = java.util.Arrays.copyOf(ar, ar.length + 1); // копируем массив т.к.  модифицировать нельзя с длиной + 1 от исходного)  
+    res[ar.length] = number; // добавляем значение в последний индекс равный длине массива 
     return res;
 }
 /**
@@ -28,9 +28,14 @@ public static int[] insert(int[] ar, int index, int number) {
     //the given "number" at the given index
     //to apply System.arraycopy method 
     int[] res = java.util.Arrays.copyOf(ar, ar.length + 1);
-    System.arraycopy(ar, index, res, index + 1, ar.length - index);
-    res[index] = number;
-    return res; 
+    System.arraycopy(ar, index, res, index + 1, ar.length - index); 
+    // ar                -  src - исходный массив, 
+    // index             -  srcPos - начальная позиция в исходном массиве (для вставки)
+    // res               -  dest - целевой массив. 
+    // index + 1         -  dstpos - начальная позиция в целевых данных.
+    // ar.length - index - length - количество элементов массива, которые необходимо скопировать.
+    res[index] = number; //добавляем нужное значение в нужны     индекс
+    return res; // ar {10, 7, 12, -4, 13, 3, 14} newNumber = 30; int[] expected_0 ={newNumber, 10, 7, 12, -4, 13, 3, 14}; nsert(numbers, 0, newNumber)
 }
 /**
  * 
