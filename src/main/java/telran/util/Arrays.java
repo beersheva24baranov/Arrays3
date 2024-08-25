@@ -53,16 +53,16 @@ public static int[] remove(int[] numbers, int index) {
 }
 private static boolean pushMaxAtEnd(int [] ar, int length) {
     boolean res = true;
-    for(int i = 0; i < length; i++) {
-        if (ar[i] > ar[i + 1]) {
+    for(int i = 0; i < length; i++) { // если i  от 0 до длины то увеличиваем
+        if (ar[i] > ar[i + 1]) {   //  текущее больше следующего 
             res = false;
-            swap(ar, i, i + 1);
+            swap(ar, i, i + 1); // меняем их местами свапом
         }
     }
     return res;
 }
-private static void swap(int[] ar, int i, int j) {
-    int tmp = ar[i];
+private static void swap(int[] ar, int i, int j) { // замена местами 
+    int tmp = ar[i]; //   применяем  3 переменную
     ar[i] = ar[j];
     ar[j] = tmp;
 }
