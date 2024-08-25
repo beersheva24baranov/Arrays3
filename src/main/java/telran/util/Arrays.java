@@ -46,8 +46,8 @@ public static int[] insert(int[] ar, int index, int number) {
 public static int[] remove(int[] numbers, int index) {
     //creates new array with no element in "numbers" at "index"
     //to apply System.arraycopy method 
-    int[] res = java.util.Arrays.copyOf(numbers, numbers.length - 1);
-    System.arraycopy(numbers, index + 1, res, index, res.length - index);
+    int[] res = java.util.Arrays.copyOf(numbers, numbers.length - 1); // Копируем массив  с длинной на 1 короче
+        System.arraycopy(numbers, index + 1, res, index, res.length - index);// {10, 7, 12, -4, 13, 3, 14} ->  (expected_last, remove(numbers, numbers.length-1));  =    int[] expected_last = {10, 7, 12, -4, 13, 3};
     return res;
 
 }
