@@ -92,19 +92,18 @@ public static int binarySearch(int [] ar, int key) {
             return middle;
         }
 
-        if (ar[middle] < key) { // если искомое  больше  середины  то смещаем середину правее (ищем в правой половине)
-            left = middle + 1;
+        if (ar[middle] < key) { // если искомое  больше  середины  то смещаем середину правее 
+            left = middle + 1;//сужаем
         } else {
-            right = middle - 1; // иначе смещаемся влево (ищем в левой половине)
-        }
+            right = middle - 1; // иначе смещаемся влево 
     }
     return -(left + 1);
 }
 public static int[] insertSorted(int[] arSorted, int number) {
 
-    int  insPosition = binarySearch(arSorted, number);
+    int  insPosition = binarySearch(arSorted, number); // массив и позиция -  возвращаем результат  поиска
 
-    if ( insPosition < 0) {
+    if ( insPosition < 0) {        // если результат меньше нуля то 
         insPosition = -(insPosition + 1);
     }
 
