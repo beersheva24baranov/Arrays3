@@ -107,13 +107,13 @@ public static int[] insertSorted(int[] arSorted, int number) {
         insPosition = -(insPosition + 1);
     }
 
-    int [] newAr = new int[arSorted.length + 1];
+    int [] newAr = new int[arSorted.length + 1]; // создаем  новый массив длиннее на 1 позицию из уже отсортированнго
 
-    System.arraycopy(arSorted, 0, newAr, 0, insPosition);
+    System.arraycopy(arSorted, 0, newAr, 0, insPosition); // копируем  все до инсерт позишн
 
-    newAr[insPosition] = number;
+    newAr[insPosition] = number; // вставляем нужное в инсерн позишн
 
-    System.arraycopy(arSorted, insPosition, newAr, insPosition + 1, arSorted.length - insPosition);
+    System.arraycopy(arSorted, insPosition, newAr, insPosition + 1, arSorted.length - insPosition); // довставляем все после инсерт позишн
 
     return newAr;
 }
