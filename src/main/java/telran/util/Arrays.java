@@ -157,7 +157,7 @@ public static <T> void sort(T[] array, Comparator<T> comparator) {
         length--;
         flSort = true;
         for (int i = 0; i < length; i++) {
-            if (comparator.compare(array[i], array[i + 1]) > 0) {
+            if (comparator.compare(array[i], array[i + 1]) > 0) { // если несортировано то свапаем
                 swap(array, i, i + 1);
                 flSort = false;
             }
