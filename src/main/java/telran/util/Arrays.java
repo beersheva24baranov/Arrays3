@@ -97,14 +97,14 @@ public static int binarySearch(int [] ar, int key) {
         } else {
             right = middle - 1; // иначе смещаемся влево 
     }
-    return -(left + 1);
+    return -(left + 1); //* */
 }
 public static int[] insertSorted(int[] arSorted, int number) {
 
     int  insPosition = binarySearch(arSorted, number); // массив и позиция -  возвращаем результат  поиска
 
     if ( insPosition < 0) {        // если результат меньше нуля то 
-        insPosition = -(insPosition + 1);
+        insPosition = -(insPosition + 1); //* */
     }
 
     int [] newAr = new int[arSorted.length + 1]; // создаем  новый массив длиннее на 1 позицию из уже отсортированнго
@@ -124,7 +124,7 @@ public static boolean isOneSwap(int[] array) {
     for (int i = 0; i < n - 1; i++) {
         if (array[i] > array[i + 1]) {
             first = i;
-            break;
+            break; // если находим несортированный  заносим идекс - идем с начала
         }
     }
     
@@ -132,18 +132,18 @@ public static boolean isOneSwap(int[] array) {
         return false;
     }
 
-    for (int i = n - 1; i > first; i--) {
-        if (array[i] < array[first]) {
+    for (int i = n - 1; i > first; i--) { // если находим несортированный  заносим идекс - идем с конца если и больше то уменьшаем
+        if (array[i] < array[first]) { // если и меньше  то стопорим и  делаим и секондом
             second = i;
             break;
         }
     }
 
-    swap(array, first, second);
+    swap(array, first, second); // меняем местаами
 
     for (int i = 0; i < n - 1; i++) {
         if (array[i] > array[i + 1]) {
-            return false;
+            return false;// проверяем что все отсортировано 
         }
     }
 
